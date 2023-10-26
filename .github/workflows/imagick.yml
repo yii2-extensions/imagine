@@ -19,12 +19,13 @@ on:
       - 'infection.json.dist'
       - 'psalm.xml'
 
-name: build
+name: imagick
 
 jobs:
   phpunit:
     uses: yiisoft/actions/.github/workflows/phpunit.yml@master
     with:
+      extensions: intl, imagick
       os: >-
         ['ubuntu-latest', 'windows-latest']
       php: >-
