@@ -40,7 +40,7 @@ abstract class AbstractImage extends TestCase
         @unlink($this->runtimeWatermarkFile);
     }
 
-    public function testText()
+    public function testText(): void
     {
         if (!$this->isFontTestSupported()) {
             $this->markTestSkipped('Skipping ImageGdTest Gd not installed');
@@ -57,7 +57,7 @@ abstract class AbstractImage extends TestCase
         $this->assertFileExists($this->runtimeTextFile);
     }
 
-    public function testCrop()
+    public function testCrop(): void
     {
         $point = [20, 20];
         $img = Image::crop($this->imageFile, 100, 100, $point);
@@ -66,14 +66,14 @@ abstract class AbstractImage extends TestCase
         $this->assertEquals(100, $img->getSize()->getHeight());
     }
 
-    public function testWatermark()
+    public function testWatermark(): void
     {
         $img = Image::watermark($this->imageFile, $this->watermarkFile);
         $img->save($this->runtimeWatermarkFile);
         $this->assertFileExists($this->runtimeWatermarkFile);
     }
 
-    public function testFrame()
+    public function testFrame(): void
     {
         $frameSize = 5;
         $original = Image::getImagine()->open($this->imageFile);
@@ -84,7 +84,7 @@ abstract class AbstractImage extends TestCase
         $this->assertEquals($size->getWidth(), $originalSize->getWidth() + ($frameSize * 2));
     }
 
-    public function testThumbnail()
+    public function testThumbnail(): void
     {
         // THUMBNAIL_OUTBOUND mode.
         $img = Image::thumbnail($this->imageFile, 120, 120);
@@ -122,7 +122,7 @@ abstract class AbstractImage extends TestCase
         $this->assertEquals(120, $img->getSize()->getHeight());
     }
 
-    public function testThumbnailWithUpscaleFlag()
+    public function testThumbnailWithUpscaleFlag(): void
     {
         // THUMBNAIL_OUTBOUND mode.
         $img = Image::thumbnail($this->imageFile, 700, 700, ImageInterface::THUMBNAIL_OUTBOUND | ImageInterface::THUMBNAIL_FLAG_UPSCALE);
@@ -163,7 +163,7 @@ abstract class AbstractImage extends TestCase
     /**
      * @dataProvider \yiiunit\imagine\providers\Data::resize
      */
-    public function testResize($width, $height, $keepAspectRatio, $allowUpscaling, $newWidth, $newHeight)
+    public function testResize($width, $height, $keepAspectRatio, $allowUpscaling, $newWidth, $newHeight): void
     {
         $img = Image::resize($this->imageFile, $width, $height, $keepAspectRatio, $allowUpscaling);
 
@@ -171,7 +171,7 @@ abstract class AbstractImage extends TestCase
         $this->assertEquals($newHeight, $img->getSize()->getHeight());
     }
 
-    public function testShouldThrowExceptionOnDriverInvalidArgument()
+    public function testShouldThrowExceptionOnDriverInvalidArgument(): void
     {
         Image::setImagine(null);
         Image::$driver = 'fake-driver';
@@ -181,10 +181,10 @@ abstract class AbstractImage extends TestCase
         Image::getImagine();
     }
 
-    public function testIfAutoRotateThrowsException()
+    public function testIfAutoRotateThrowsException(): void
     {
         $img = Image::thumbnail($this->imageFile, 120, 120);
-        $this->assertInstanceOf('\Imagine\Image\ImageInterface', Image::autorotate($img));
+        $this->assertInstanceOf(ImageInterface::class, Image::autorotate($img));
     }
 
     abstract protected function isFontTestSupported();
