@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 /**
  * @link https://www.yiiframework.com/
+ *
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license https://www.yiiframework.com/license/
  */
@@ -30,6 +31,7 @@ use yii\helpers\ArrayHelper;
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @author Qiang Xue <qiang.xue@gmail.com>
+ *
  * @since 2.0
  */
 class BaseImage
@@ -37,15 +39,15 @@ class BaseImage
     /**
      * GD2 driver definition for Imagine implementation using the GD library.
      */
-    const DRIVER_GD2 = 'gd2';
+    public const DRIVER_GD2 = 'gd2';
     /**
      * imagick driver definition.
      */
-    const DRIVER_IMAGICK = 'imagick';
+    public const DRIVER_IMAGICK = 'imagick';
     /**
      * gmagick driver definition.
      */
-    const DRIVER_GMAGICK = 'gmagick';
+    public const DRIVER_GMAGICK = 'gmagick';
 
     /**
      * @var ImagineInterface instance.
@@ -66,7 +68,7 @@ class BaseImage
      */
     public static $thumbnailBackgroundColor = 'FFF';
     /**
-     * @var string|int background alpha (transparency) to use when creating thumbnails in
+     * @var int|string background alpha (transparency) to use when creating thumbnails in
      * `ImageInterface::THUMBNAIL_INSET` mode with both width and height specified. Default is solid.
      *
      * @since 2.0.4
@@ -75,6 +77,7 @@ class BaseImage
 
     /**
      * Returns the `Imagine` object that supports various image manipulations.
+     *
      * @return ImagineInterface the `Imagine` object
      */
     public static function getImagine()
@@ -96,8 +99,10 @@ class BaseImage
 
     /**
      * Creates an `Imagine` object based on the specified [[driver]].
-     * @return ImagineInterface the new `Imagine` object
+     *
      * @throws InvalidConfigException if [[driver]] is unknown or the system doesn't support any [[driver]].
+     *
+     * @return ImagineInterface the new `Imagine` object
      */
     protected static function createImagine()
     {
@@ -128,9 +133,12 @@ class BaseImage
     /**
      * Takes either file path or ImageInterface. In case of file path, creates an instance of ImageInterface from it.
      *
-     * @param string|resource|ImageInterface $image
-     * @return ImageInterface
+     * @param ImageInterface|resource|string $image
+     *
      * @throws InvalidArgumentException if the image argument is invalid.
+     *
+     * @return ImageInterface
+     *
      * @since 2.1.0
      */
     protected static function ensureImageInterfaceInstance($image)
@@ -164,12 +172,14 @@ class BaseImage
      * $obj->crop('path\to\image.jpg', 200, 200, $point);
      * ```
      *
-     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     * @param ImageInterface|resource|string $image either ImageInterface, resource or a string containing file path
      * @param int $width the crop width
      * @param int $height the crop height
      * @param array $start the starting point. This must be an array with two elements representing `x` and `y` coordinates.
-     * @return ImageInterface
+     *
      * @throws InvalidArgumentException if the `$start` parameter is invalid.
+     *
+     * @return ImageInterface
      */
     public static function crop($image, $width, $height, array $start = [0, 0])
     {
@@ -185,9 +195,11 @@ class BaseImage
     /**
      * Rotates an image automatically based on EXIF information.
      *
-     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     * @param ImageInterface|resource|string $image either ImageInterface, resource or a string containing file path
      * @param string $color
+     *
      * @return \Imagine\Image\ImageInterface
+     *
      * @since 2.1.0
      */
     public static function autorotate($image, $color = '000000')
@@ -213,10 +225,11 @@ class BaseImage
      * contained within the thumbnail dimensions. The rest is filled with background that could be configured via
      * [[Image::$thumbnailBackgroundColor]] and [[Image::$thumbnailBackgroundAlpha]].
      *
-     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     * @param ImageInterface|resource|string $image either ImageInterface, resource or a string containing file path
      * @param int $width the width in pixels to create the thumbnail
      * @param int $height the height in pixels to create the thumbnail
      * @param int $settings settings for resizing original image, one or more of the ManipulatorInterface::THUMBNAIL_ flags (joined with |)
+     *
      * @return ImageInterface
      */
     public static function thumbnail($image, $width, $height, $settings = ManipulatorInterface::THUMBNAIL_OUTBOUND)
@@ -275,11 +288,12 @@ class BaseImage
      *
      * You can set $keepAspectRatio to false if you want to force fixed width and height.
      *
-     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     * @param ImageInterface|resource|string $image either ImageInterface, resource or a string containing file path
      * @param int $width the width in pixels
      * @param int $height the height in pixels
      * @param bool $keepAspectRatio should the image keep aspect ratio
      * @param bool $allowUpscaling should the image be upscaled if needed
+     *
      * @return ImageInterface
      *
      * @since 2.1.1
@@ -301,11 +315,14 @@ class BaseImage
 
     /**
      * Adds a watermark to an existing image.
-     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
-     * @param string|resource|ImageInterface $watermarkImage either ImageInterface, resource or a string containing watermark file path
+     *
+     * @param ImageInterface|resource|string $image either ImageInterface, resource or a string containing file path
+     * @param ImageInterface|resource|string $watermarkImage either ImageInterface, resource or a string containing watermark file path
      * @param array $start the starting point. This must be an array with two elements representing `x` and `y` coordinates.
-     * @return ImageInterface
+     *
      * @throws InvalidArgumentException if `$start` is invalid.
+     *
+     * @return ImageInterface
      */
     public static function watermark($image, $watermarkImage, array $start = [0, 0])
     {
@@ -322,7 +339,8 @@ class BaseImage
 
     /**
      * Draws a text string on an existing image.
-     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     *
+     * @param ImageInterface|resource|string $image either ImageInterface, resource or a string containing file path
      * @param string $text the text to write to the image
      * @param string $fontFile the file path or path alias
      * @param array $start the starting position of the text. This must be an array with two elements representing `x` and `y` coordinates.
@@ -332,8 +350,9 @@ class BaseImage
      * - size: The font size. Defaults to 12.
      * - angle: The angle to use to write the text. Defaults to 0.
      *
-     * @return ImageInterface
      * @throws InvalidArgumentException if `$fontOptions` is invalid.
+     *
+     * @return ImageInterface
      */
     public static function text($image, $text, $fontFile, array $start = [0, 0], array $fontOptions = [])
     {
@@ -358,10 +377,12 @@ class BaseImage
 
     /**
      * Adds a frame around of the image. Please note that the image size will increase by `$margin` x 2.
-     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     *
+     * @param ImageInterface|resource|string $image either ImageInterface, resource or a string containing file path
      * @param int $margin the frame size to add around the image
      * @param string $color the frame color
      * @param int $alpha the alpha value of the frame.
+     *
      * @return ImageInterface
      */
     public static function frame($image, $margin = 20, $color = '666', $alpha = 100)
@@ -391,6 +412,7 @@ class BaseImage
      * @param BoxInterface $sourceBox original image box
      * @param int $width thumbnail width
      * @param int $height thumbnail height
+     *
      * @return BoxInterface thumbnail box
      *
      * @since 2.0.4
@@ -418,8 +440,10 @@ class BaseImage
      * @param int $width new image width
      * @param int $height new image height
      * @param bool $keepAspectRatio should we keep aspect ratio even if both with and height are set
-     * @return BoxInterface new image box
+     *
      * @throws InvalidArgumentException if both width and height are null.
+     *
+     * @return BoxInterface new image box
      *
      * @since 2.1.1
      */
@@ -456,6 +480,7 @@ class BaseImage
      *
      * @param BoxInterface $sourceBox
      * @param BoxInterface $destinationBox
+     *
      * @return bool
      */
     public static function isUpscaling(BoxInterface $sourceBox, BoxInterface $destinationBox)

@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace yiiunit\imagine\base;
 
 use Yii;
 use yii\helpers\FileHelper;
 use yii\imagine\Image;
 use Imagine\Image\ImageInterface;
-use Imagine\Image\Point;
 use yii\base\InvalidConfigException;
 use yiiunit\imagine\TestCase;
 
@@ -49,12 +50,11 @@ abstract class AbstractImage extends TestCase
 
         $img = Image::text($this->imageFile, 'Yii-2 Image', $fontFile, [0, 0], [
             'size' => 12,
-            'color' => '000'
+            'color' => '000',
         ]);
 
         $img->save($this->runtimeTextFile);
-        $this->assertTrue(file_exists($this->runtimeTextFile));
-
+        $this->assertFileExists($this->runtimeTextFile);
     }
 
     public function testCrop()
@@ -64,14 +64,13 @@ abstract class AbstractImage extends TestCase
 
         $this->assertEquals(100, $img->getSize()->getWidth());
         $this->assertEquals(100, $img->getSize()->getHeight());
-
     }
 
     public function testWatermark()
     {
         $img = Image::watermark($this->imageFile, $this->watermarkFile);
         $img->save($this->runtimeWatermarkFile);
-        $this->assertTrue(file_exists($this->runtimeWatermarkFile));
+        $this->assertFileExists($this->runtimeWatermarkFile);
     }
 
     public function testFrame()

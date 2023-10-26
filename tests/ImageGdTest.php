@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace yiiunit\imagine;
 
 use yii\imagine\Image;
@@ -28,6 +30,6 @@ class ImageGdTest extends AbstractImage
     {
         $infos = gd_info();
 
-        return isset($infos['FreeType Support']) ? $infos['FreeType Support'] : false;
+        return $infos['FreeType Support'] ?? false;
     }
 }
