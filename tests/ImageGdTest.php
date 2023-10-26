@@ -26,7 +26,7 @@ class ImageGdTest extends AbstractImage
         }
     }
 
-    protected function isFontTestSupported()
+    protected function isFontTestSupported(): bool
     {
         $infos = gd_info();
 

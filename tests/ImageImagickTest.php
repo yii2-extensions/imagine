@@ -28,7 +28,7 @@ class ImageImagickTest extends AbstractImage
         }
     }
 
-    protected function isFontTestSupported()
+    protected function isFontTestSupported(): bool
     {
         return true;
     }

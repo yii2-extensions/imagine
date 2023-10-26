@@ -26,7 +26,7 @@ class ImageGmagickTest extends AbstractImage
         }
     }
 
-    protected function isFontTestSupported()
+    protected function isFontTestSupported(): bool
     {
         return true;
     }
