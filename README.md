@@ -1,8 +1,8 @@
 <p align="center">
-    <a href="https://github.com/yii2-extensions/template" target="_blank">
+    <a href="https://github.com/yii2-extensions/imagine" target="_blank">
         <img src="https://www.yiiframework.com/image/yii_logo_light.svg" height="100px;">
     </a>
-    <h1 align="center">Yii2-Template.</h1>
+    <h1 align="center">Imagine</h1>
     <br>
 </p>
 
@@ -13,32 +13,57 @@
     <a href="https://github.com/yiisoft/yii2/tree/2.2" target="_blank">
         <img src="https://img.shields.io/badge/Yii2%20version-2.2-blue" alt="yii2-version">
     </a>
-    <a href="https://github.com/yii2-extensions/template/actions/workflows/build.yml" target="_blank">
-        <img src="https://github.com/yii2-extensions/template/actions/workflows/build.yml/badge.svg" alt="PHPUnit">
+    <a href="https://github.com/yii2-extensions/imagine/actions/workflows/build.yml" target="_blank">
+        <img src="https://github.com/yii2-extensions/imagine/actions/workflows/build.yml/badge.svg" alt="PHPUnit">
     </a>
-    <a href="https://codecov.io/gh/yii2-extensions/template" target="_blank">
-        <img src="https://codecov.io/gh/yii2-extensions/template/branch/main/graph/badge.svg?token=MF0XUGVLYC" alt="Codecov">
-    </a>
-    <a href="https://github.com/yii2-extensions/template/actions/workflows/static.yml" target="_blank">
+    <a href="https://codecov.io/gh/yii2-extensions/imagine" target="_blank"> 
+        <img src="https://codecov.io/gh/yii2-extensions/imagine/graph/badge.svg?token=Sx1GlGe8n2" alt="Codecov"> 
+    </a>    
+    <a href="https://github.com/yii2-extensions/imagine/actions/workflows/static.yml" target="_blank">
         <img src="https://github.com/yii2-extensions/gii/actions/workflows/static.yml/badge.svg" alt="PHPStan">
     </a>
-    <a href="https://github.com/yii2-extensions/template/actions/workflows/static.yml" target="_blank">
-        <img src="https://img.shields.io/badge/PHPStan%20level-2-blue" alt="PHPStan level">
-    </a>    
-    <a href="https://github.styleci.io/repos/698621511?branch=main" target="_blank">
-        <img src="https://github.styleci.io/repos/698621511/shield?branch=main" alt="Code style">
+    <a href="https://github.com/yii2-extensions/imagine/actions/workflows/static.yml" target="_blank">
+        <img src="https://img.shields.io/badge/PHPStan%20level-3-blue" alt="PHPStan level">
+    </a>
+    <a href="https://github.styleci.io/repos/708447136?branch=main" target="_blank">
+        <img src="https://github.styleci.io/repos/708447136/shield?branch=main" alt="Code style">
     </a>        
 </p>
 
-## Requirements
+## Installation
 
-The minimun version of `PHP` required by this package is `PHP 8.1`.
+The preferred way to install this extension is through [composer](https://getcomposer.org/download/).
 
-For install this package, you need [composer](https://getcomposer.org/).
+Either run
+
+```
+php composer.phar require --dev --prefer-dist yii2-extensions/imagine
+```
+
+or add
+
+```
+"yii2-extensions/imagine": "dev-main"
+```
+
+to the require-dev section of your `composer.json` file.
 
 ## Usage
 
-[Check the documentation docs](/docs/README.md) to learn about usage.
+This extension is a wrapper to the [Imagine](https://imagine.readthedocs.org/) and also adds the most commonly used
+image manipulation methods.
+
+The following example shows how to use this extension:
+
+```php
+use yii\imagine\Image;
+
+// frame, rotate and save an image
+Image::frame('path/to/image.jpg', 5, '666', 0)
+    ->rotate(-8)
+    ->save('path/to/destination/image.jpg', ['jpeg_quality' => 50]);
+```
+
 
 ## Testing
 
